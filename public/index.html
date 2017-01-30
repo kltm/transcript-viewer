@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Transcript Viewer Demo</title>
+    
+    <!-- CSS. -->
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    
+    <!-- JS variables. -->
+    
+    <!-- JS libraries. -->
+    <script type="text/javascript" src="jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+    <script type="text/javascript" src="plotly.min.js"></script><style></style>
+    <script type="text/javascript" src="TranscriptViewer.js"></script>
+    
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  </head>
+  <!-- <body style="padding-top: 70px; padding-bottom: 70px;"> -->
+  <body>
+
+    <div class="container">
+      
+      <div class="header text-center">
+	<h2>Viewer Demo</h2>
+      </div>
+      
+      <!-- Thing. -->
+      <div class="panel panel-default">
+	<div class="panel-heading">
+	  <h3 class="panel-title">Available Demos</h3>
+	</div>
+	
+	<div class="panel-body">
+	  
+	  <ul>
+	    <li>
+              <a href="#01">
+		All shape/glyphs
+              </a>
+	    </li>
+	    <li>
+              <a href="#02">
+		All shape/glyphs (small)
+              </a>
+	    </li>
+	    <li>
+              <a href="#03">
+		All data/plotting <em>(still fiddling...)</em>
+              </a>
+	    </li>
+	  </ul>
+	  
+	</div>
+      </div>
+      
+      <div id="01" class="panel panel-default">
+	<div class="panel-body">
+	  <div id="graph01" style="width: 800px; height: 600px;"></div>
+	  <!-- <div id="graph01hoverinfo" style="margin-left:80px;"></div> -->
+	</div>
+      </div>
+      
+      <div id="02" class="panel panel-default">
+	<div class="panel-body">
+	  <div id="graph02" style="width: 500px; height: 375px;"></div>
+	  <!-- <div id="graph02hoverinfo" style="margin-left:80px;"></div> -->
+	</div>
+      </div>
+      
+      <div id="03" class="panel panel-default">
+	<div class="panel-body">
+	  <div id="graph03" style="width: 800px; height: 600px;"></div>
+	  <!-- <div id="graph03hoverinfo" style="margin-left:80px;"></div> -->
+	</div>
+      </div>
+      
+    </div>
+    
+  </body>
+</html>
