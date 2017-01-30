@@ -14,7 +14,7 @@ var us = require('underscore');
 
 function BasePageInit(){    
     // Nuttin' doin' here.
-    console.log("Iitialized...");
+    console.log("Initialized...");
 }
 
 function GetData(){
@@ -312,7 +312,7 @@ function GetData(){
 }
 
 // Try just using shapes.
-function BaseViewerInit01(data, div_id){
+function BaseViewerInit01(data, div_id, hover_id){
 
     var offset = 10;
     var text_offset = 4;
@@ -406,7 +406,7 @@ function BaseViewerInit01(data, div_id){
 	    range: [data['start'], data['end']],
 	    zeroline: false,
 	    side: 'top',
-	    gridcolor: '#aaa',
+	    gridcolor: '#ccc',
 	    zerolinecolor: '#fff'
 	},
 	yaxis: {
@@ -414,21 +414,19 @@ function BaseViewerInit01(data, div_id){
 	    showgrid: false,
 	    showticklabels: false,
 	},
-	width: 800,
-	height: 600,
+	// width: 800,
+	// height: 600,
 	hovermode: false,
 	shapes: shapes
     };
-
 
     Plotly.newPlot(div_id, traces, layout);
 }
 
 // Try just using data.
-function BaseViewerInit02(data, div_id){
+function BaseViewerInit02(data, div_id, hover_id){
 
     var offset = 10;
-    var text_offset = 5;
     
     // Raw base data lines.
     var traces = [];
@@ -441,85 +439,43 @@ function BaseViewerInit02(data, div_id){
 	// Give us the right y-offset for the data.
 	var yoff = (data['ordered-transcripts'].length - index) * offset;
 
-	// Add transcript line to the plot.
-	var main_line = {
-	    type: 'line',
-	    xref: 'x',
-	    yref: 'y',
-	    x0: transcript['start'],
-	    y0: yoff,
-	    x1: transcript['end'],
-	    y1: yoff,
-	    line: {
-		color: 'rgb(55, 128, 191)',
-		width: 3
-	    }
-	};
-	//shapes.push(main_line);
-
 	// Add a main background data trace.
 	var main_data_trace = {
 	    x: [transcript['start'], transcript['end']],
 	    y: [yoff, yoff],
 	    mode: 'line',
+	    line :{
+		color: 'rgb(55, 128, 191)',
+		width: 3		
+	    },
+	    hoverinfo: 'x+name',
 	    name: transcript['name']
 	};
 	traces.push(main_data_trace);
 
 	// Add the (hopefully anonymous) segements to the trace.
-	var toggle = false;
 	us.each(transcript['data'], function(d){
 
 	    var a = d[0];
 	    var b = d[1];
 	    var t = d[2];
 
-	    // Directionality.
-	    // Flip.
-	    if( t === 'x' ){
-	      toggle = true;
-	    }
-
 	    // Add the data for highlighting.
 	    var anon_seg_trace = {
 		x: [a, b],
 		y: [yoff, yoff],
 		mode: 'line',
-		name: null
-	    };
-	    // traces.push(anon_seg_trace);
-
-	    // Get a better shape.
-	    var seg_line = {
-		// type: 'line',
-		// xref: 'x',
-		// yref: 'y',
-		// x0: a,
-		// y0: yoff,
-		// x1: b,
-		// y1: yoff,
-		// line: {
-		//   color: 'rgb(55, 128, 191)',
-		//   width: 10
-		// }
-		type: 'rect',
-		x0: a,
-		y0: yoff + 2,
-		x1: b,
-		y1: yoff - 2,
-		line: {
+		line :{
 		    color: 'rgb(55, 128, 191)',
-		    width: 1
-		}
+		    width: 10		
+		},
+		showlegend: false,
+		hoverinfo:"x+name",
+		name: transcript['name']
 	    };
-	    if( ! toggle ){
-		seg_line['fillcolor'] = 'rgba(55, 128, 191, 1.0)';
-	    }else{
-		seg_line['fillcolor'] = 'rgba(255, 255, 255, 1.0)';
-	    }
-	    shapes.push(seg_line);
-	});
+	    traces.push(anon_seg_trace);
 
+	});
     });
 
     ///
@@ -527,19 +483,34 @@ function BaseViewerInit02(data, div_id){
 	title: data['name'] + ' / ' + data['sequence-region'],
 	xaxis: {
 	    range: [data['start'], data['end']],
-	    zeroline: false
+	    zeroline: false,
+	    side: 'top',
+	    gridcolor: '#ccc',
+	    zerolinecolor: '#fff'
 	},
 	yaxis: {
 	    range: [0, (data['ordered-transcripts'].length * (offset + 1))],
-	    showgrid: true
+	    showgrid: false,
+	    showticklabels: false,
 	},
-	width: 800,
-	height: 600,
-	//shapes: []
-	shapes: shapes
+	// width: 800,
+	// height: 600,
+	shapes: []
     };
 
+    // var plot = document.getElementById(div_id);
+    // var hinf = document.getElementById(hover_id);
+
     Plotly.newPlot(div_id, traces, layout);
+
+    // plot.on('plotly_hover', function(data){
+    // 	var infotext = data.points.map(function(d){
+    // 	    return (d.data.name+': x= '+d.x+', y= '+d.y.toPrecision(3));
+    // 	});
+    // 	hinf.innerHTML = infotext.join('\n');
+    // }).on('plotly_unhover', function(data){
+    // 	hinf.innerHTML = '';
+    // });
 }
 
 // Embed the jQuery setup runner.
@@ -550,7 +521,8 @@ function BaseViewerInit02(data, div_id){
 	
 	var stash = GetData();
 
-	BaseViewerInit01(stash, 'graph01');
-	BaseViewerInit02(stash, 'graph02');
+	BaseViewerInit01(stash, 'graph01', 'graph01hoverinfo');
+	BaseViewerInit01(stash, 'graph02', 'graph02hoverinfo');
+	BaseViewerInit02(stash, 'graph03', 'graph03hoverinfo');
     });
 })();

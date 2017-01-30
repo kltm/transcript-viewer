@@ -191,7 +191,7 @@ app.all('/', function (req, res){
 ///
 
 // Return nested app.
-app.all('/view/:foo?', function (req, res){
+app.all('/viewer/:foo?', function (req, res){
         // Variables, render, and output.
         var tmpl_args = {
             // 'show_editor_p': show_editor_p,
