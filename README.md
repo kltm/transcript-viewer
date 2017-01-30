@@ -1,21 +1,34 @@
 JavaScript Transcript Viewer Demonstration
 ===
 
-* What is this?
+# What is this?
 
-This is a very basic demonstration of the possibilities of using basic
-plotting packages to easily and simply create a viewer to look at
-transcript information (e.g. GFF3 gbrowse downloads).
+This is a very basic demonstration of the possibilities of using a
+basic plotting package or graphics library to simply create a JS
+viewer to look at transcript information (e.g. GFF3 gbrowse
+downloads).
 
 This is meant to stand as an argument against more complicated methods
 of embedding a transcript viewer into a web application--what is here
 uses basic data and simple drawing methods.
 
-* Where can I see it?
+Please see http://zfin.org/ZDB-TSCRIPT-110325-1752 to see what this
+demonstration was being modeled towards.
+
+# Where can I see it?
 
 The compiled and "usable" demonstration can be found [here](https://kltm.github.io/transcript-viewer/).
 
-The data is a GFF3 file taken from
-ZFIN [here](http://zfin.org/ZDB-TSCRIPT-110325-1752). Please see
-http://zfin.org/ZDB-TSCRIPT-110325-1752 to see what was being modeled
-towards.
+# What are these made with?
+
+The graphics library is [Ploty.js](https://plot.ly/javascript/),
+mostly using the "shapes" API. The "application" was developed with
+Node.js, using the usual suspects, and compiled into a static
+deliverable.
+
+# What data is being used here?
+
+The data is from a GFF3 taken from the ZFIN [GBrowse
+instance](http://zfin.org/action/gbrowse/?name=25%3A14932641..14953381&h_feat=pax6a-001).
+
+It was then massaged down to something more palatable using a series of Emacs macros, taking it to its final form [here](https://github.com/kltm/transcript-viewer/blob/master/data/data.json).
