@@ -24,7 +24,7 @@ The compiled and "usable" demonstration can be found [here](https://kltm.github.
 There are currently three displays of two attempts at using the
 Plotly.js package. Some are more functional/usable than others.
 
-The highlights are things like zooming (click and drag in the
+The current highlights are things like zooming (click and drag in the
 display), panning (pull left and right while over the x-axis), and
 screen shots. Notice the controls that appear above the display when
 hovering over the display; as well, double-clicking returns the zoom
